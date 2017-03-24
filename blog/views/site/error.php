@@ -1,27 +1,28 @@
-<?php
+<div class="st-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="primary" class="content-area padding-content white-color">
+                    <main id="main" class="site-main" role="main">
 
-/* @var $this yii\web\View */
-/* @var $name string */
-/* @var $message string */
-/* @var $exception Exception */
+                        <section class="error-404 not-found text-center">
+                            <h1 class="404">404</h1>
 
-use yii\helpers\Html;
+                            <p class="lead">Извините, запрашивая страница не найдена!</p>
 
-$this->title = $name;
-?>
-<div class="site-error">
+                            <div class="row">
+                                <div class="col-sm-4 col-sm-offset-4">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+                                    <p class="go-back-home"><a href="/">
+                                            Вернуться на главную</a></p>
+                                </div>
+                            </div>
 
-    <div class="alert alert-danger">
-        <?= nl2br(Html::encode($message)) ?>
+                        </section><!-- .error-404 -->
+
+                    </main><!-- #main -->
+                </div><!-- #primary -->
+            </div>
+        </div>
     </div>
-
-    <p>
-        The above error occurred while the Web server was processing your request.
-    </p>
-    <p>
-        Please contact us if you think this is a server error. Thank you.
-    </p>
-
 </div>
