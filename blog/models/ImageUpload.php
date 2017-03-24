@@ -26,8 +26,8 @@ class ImageUpload extends Model
         if ($this->validate()) {
             $this->image->saveAs('uploads/' . $this->image->baseName . '.' . $this->image->extension);
 
-            if ($currentImg != '' && $this->image != '' && file_exists(Yii::getAlias('@web') . '/uploads/' . $currentImg)) {
-                unlink(Yii::getAlias('@web') . '/uploads/' . $currentImg);
+            if ($currentImg != '' && $this->image != '' && file_exists(Yii::getAlias('@web') . 'uploads/' . $currentImg)) {
+                unlink(Yii::getAlias('@web') . 'uploads/' . $currentImg);
             }
             return $this->image->name;
         } else {
