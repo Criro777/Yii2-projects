@@ -105,14 +105,26 @@ class Article extends \yii\db\ActiveRecord
      */
     public function saveTags($tags)
     {
-        if (is_array($tags)) {
-            // $this->clearCurrentTags();
+        if (!is_array($tags)) {
+            ArticleTag::deleteAll(['article_id' => $this->id]);
+        } else {
             ArticleTag::deleteAll(['article_id' => $this->id]);
             foreach ($tags as $tag_id) {
                 $tag = Tag::findOne($tag_id);
                 $this->link('tags', $tag);
             }
         }
+    }
+
+    /**
+     * Привязка статьи к определённой категории
+     * @param $category_id
+     */
+    public function saveCategory($category_id)
+    {
+        $category = Category::findOne($category_id);
+
+            $this->link('category', $category);
     }
 
     /**
