@@ -114,6 +114,8 @@ class Article extends \yii\db\ActiveRecord
      */
     public function deleteImage()
     {
-        unlink(Yii::getAlias('@web') . 'uploads/' . $this->image);
+        if(!empty($this->image) &&  file_exists(Yii::getAlias('@web') . 'uploads/' . $this->image)) {
+            unlink(Yii::getAlias('@web') . 'uploads/' . $this->image);
+        }
     }
 }
