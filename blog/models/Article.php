@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\data\Pagination;
 
 /**
  * This is the model class for table "article".
@@ -154,5 +155,59 @@ class Article extends \yii\db\ActiveRecord
         if(!empty($this->image) &&  file_exists(Yii::getAlias('@web') . 'uploads/' . $this->image)) {
             unlink(Yii::getAlias('@web') . 'uploads/' . $this->image);
         }
+    }
+
+    /**
+     *Получение списка всех статей с пагинацией
+     * @param int $pageSize
+     * @return mixed
+     */
+    public static function getAll($pageSize = 5)
+    {
+        // build a DB query to get all articles
+        $query = Article::find();
+
+        // get the total number of articles (but do not fetch the article data yet)
+        $count = $query->count();
+
+        // create a pagination object with the total count
+        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => $pageSize]);
+
+        // limit the query using the pagination and retrieve the articles
+        $articles = $query->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
+
+        $data['articles'] = $articles;
+        $data['pagination'] = $pagination;
+
+        return $data;
+    }
+
+    /**
+     * получение популярных статей с наибольшим количеством просмотров
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function getPopular()
+    {
+        return Article::find()->orderBy('viewed desc')->limit(3)->all();
+    }
+
+    /**
+     * Получение последних добавленных новостей
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function getRecent()
+    {
+        return Article::find()->orderBy('date desc')->limit(3)->all();
+    }
+
+    /**
+     * Получение даты в удобном формате
+     * @return string
+     */
+    public function getDate()
+    {
+        return Yii::$app->formatter->asDate($this->date);
     }
 }
