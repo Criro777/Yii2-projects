@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Article', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Cоздать статью', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -26,7 +26,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'description:ntext',
             //'content:ntext',
             'date',
-            // 'image',
+            [
+                'format' => 'html',
+                'label' => 'Image',
+                'value' => function($data){
+                    return Html::img($data->getImage(), ['width'=>140, 'height' => 130]);
+                }
+            ],
             // 'viewed',
             // 'category_id',
 
