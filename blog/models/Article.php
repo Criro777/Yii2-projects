@@ -124,7 +124,7 @@ class Article extends \yii\db\ActiveRecord
     {
         $category = Category::findOne($category_id);
 
-            $this->link('category', $category);
+        $this->link('category', $category);
     }
 
     /**
