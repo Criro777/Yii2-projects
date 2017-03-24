@@ -100,6 +100,22 @@ class Article extends \yii\db\ActiveRecord
     }
 
     /**
+     * Привязка тегов к определённой статье
+     * @param $tags<p>массив тегов</p>
+     */
+    public function saveTags($tags)
+    {
+        if (is_array($tags)) {
+            // $this->clearCurrentTags();
+            ArticleTag::deleteAll(['article_id' => $this->id]);
+            foreach ($tags as $tag_id) {
+                $tag = Tag::findOne($tag_id);
+                $this->link('tags', $tag);
+            }
+        }
+    }
+
+    /**
      * Получение изображенияф для статьи
      * @return string название файла
      */
