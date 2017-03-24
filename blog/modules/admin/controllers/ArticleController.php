@@ -2,12 +2,14 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\ImageUpload;
 use Yii;
 use app\models\Article;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * ArticleController implements the CRUD actions for Article model.
@@ -65,8 +67,12 @@ class ArticleController extends Controller
     {
         $model = new Article();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+
+            $this->actionSetImage($model, 'create');
+
+            $model->save();
+            return $this->redirect('index');
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -82,10 +88,16 @@ class ArticleController extends Controller
      */
     public function actionUpdate($id)
     {
+
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+
+            $this->actionSetImage($model, 'update');
+
+            $model->save();
+
+            return $this->redirect('index');
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -119,6 +131,36 @@ class ArticleController extends Controller
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    /**
+     * Загрузка изображений на сервер и в базу
+     * @param $model <p>Экземпляр модели статьи </p>
+     * @param $mode <p>режим создания или замены изображения</p>
+     */
+    public function actionSetImage($model, $mode)
+    {
+        //создаём экземпляр модели загрузки изображений
+        $art_image = new ImageUpload();
+
+        //Загружаем изображение на сервер
+        $art_image->image = UploadedFile::getInstance($model, 'image');
+
+        //в зависимости от режима работы сохраняем новое или заменяем существующее изображение
+        if ($mode == 'create') {
+
+            $name = $art_image->upload();
+            $model->saveImage($name);
+            
+        } else {
+
+            $name = $art_image->upload($model->image);
+
+            if ($name) {
+
+                $model->saveImage($name);
+            }
         }
     }
 }
