@@ -20,10 +20,15 @@ class ImageUpload extends Model
     }
 
     //загрузка изображения на сервер в папку uploads
-    public function upload()
+    public function upload($currentImg = '')
     {
+
         if ($this->validate()) {
             $this->image->saveAs('uploads/' . $this->image->baseName . '.' . $this->image->extension);
+
+            if ($currentImg != '' && $this->image != '' && file_exists(Yii::getAlias('@web') . '/uploads/' . $currentImg)) {
+                unlink(Yii::getAlias('@web') . '/uploads/' . $currentImg);
+            }
             return $this->image->name;
         } else {
             return false;
