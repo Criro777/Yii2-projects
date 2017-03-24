@@ -2,7 +2,6 @@
 
 namespace app\modules\admin\controllers;
 
-use app\models\Category;
 use app\models\ImageUpload;
 use Yii;
 use app\models\Article;
@@ -40,9 +39,6 @@ class ArticleController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Article::find(),
-            'pagination' => [
-                'pageSize' => 4
-            ],
         ]);
 
         return $this->render('index', [
@@ -73,12 +69,6 @@ class ArticleController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
-            $tags = Yii::$app->request->post('tags');
-            $model->saveTags($tags);
-
-            $category = Category::findOne(Yii::$app->request->post('category'));
-            $model->saveCategory($category);
-
             $this->actionSetImage($model, 'create');
 
             $model->save();
@@ -102,12 +92,6 @@ class ArticleController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
-
-            $tags = Yii::$app->request->post('tags');
-            $model->saveTags($tags);
-
-            $category = Category::findOne(Yii::$app->request->post('category'));
-            $model->saveCategory($category);
 
             $this->actionSetImage($model, 'update');
 
