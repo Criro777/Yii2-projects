@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Article;
 use app\models\Category;
+use app\models\CommentForm;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -66,8 +67,7 @@ class SiteController extends Controller
         $popular = Article::getPopular();
         $recent = Article::getRecent();
         $categories = Category::getAll();
-
-
+        
         return $this->render('index',[
             'articles'=>$data['articles'],
             'pagination'=>$data['pagination'],
@@ -96,36 +96,16 @@ class SiteController extends Controller
         //получаем список категорий
         $categories = Category::getAll();
         //получаем список комментариев
-   
-
-
+        $comments = $article->getComments()->where(['status' => 1])->all();
+        $commentForm = new CommentForm();
+        
         return $this->render('single',[
             'article'=>$article,
             'popular'=>$popular,
             'recent'=>$recent,
             'categories'=>$categories,
-        ]);
-    }
-
-    /**
-     * Рендеринг блока категорий
-     * @param $id
-     * @return string
-     */
-
-    public function actionCategory($id)
-    {
-        $data = Category::getArticlesByCategory($id);
-        $popular = Article::getPopular();
-        $recent = Article::getRecent();
-        $categories = Category::getAll();
-
-        return $this->render('category',[
-            'articles'=>$data['articles'],
-            'pagination'=>$data['pagination'],
-            'popular'=>$popular,
-            'recent'=>$recent,
-            'categories'=>$categories
+            'comments'=>$comments,
+            'commentForm'=>$commentForm
         ]);
     }
 
@@ -159,6 +139,26 @@ class SiteController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
+    }
+
+    /**
+     * Добавление комментариев в БД
+     * @param $id
+     * @return \yii\web\Response
+     */
+    public function actionComment($id)
+    {
+        $model = new CommentForm();
+
+        if(Yii::$app->request->isPost)
+        {
+            $model->load(Yii::$app->request->post());
+            if($model->saveComment($id))
+            {
+                Yii::$app->getSession()->setFlash('comment', 'Ваш комментарий будет скоро добавлен!');
+                return $this->redirect(['site/view','id'=>$id]);
+            }
+        } else return $this->redirect(['site/index']);
     }
 
 

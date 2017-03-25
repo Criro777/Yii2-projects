@@ -150,4 +150,13 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 
         return Yii::$app->user->login($this);
     }
+
+    /**
+     * Получение аватарки пользователя
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->photo;
+    }
 }
