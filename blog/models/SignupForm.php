@@ -52,7 +52,7 @@ class SignupForm extends Model
             $user->password = sha1($this->password);
             $user->photo = ($avatar) ? '/uploads/' . $avatar : '/no-user.png';
 
-            return $user->create();
+            return $user->save();
         }
     }
 }

@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <script type="text/javascript" src="//vk.com/js/api/openapi.js?142"></script>
 
                 <script type="text/javascript">
-                    VK.init({apiId: 5925434});
+                    VK.init({apiId: 5945814});
                 </script>
 
                 <!-- Put this div tag to the place, where Auth block will be -->
