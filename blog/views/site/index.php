@@ -53,7 +53,7 @@
                         <div class="popular-post">
 
 
-                            <a href="#" class="popular-img"><img src="<?= $article->getImage();?>" alt="">
+                            <a href="<?=\yii\helpers\Url::toRoute(['site/view','id'=>$article->id]);?>" class="popular-img"><img src="<?= $article->getImage();?>" alt="">
 
                                 <div class="p-overlay"></div>
                             </a>
