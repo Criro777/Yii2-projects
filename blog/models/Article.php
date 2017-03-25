@@ -102,7 +102,7 @@ class Article extends \yii\db\ActiveRecord
 
     /**
      * Привязка тегов к определённой статье
-     * @param $tags<p>массив тегов</p>
+     * @param $tags <p>массив тегов</p>
      */
     public function saveTags($tags)
     {
@@ -152,7 +152,7 @@ class Article extends \yii\db\ActiveRecord
      */
     public function deleteImage()
     {
-        if(!empty($this->image) &&  file_exists(Yii::getAlias('@web') . 'uploads/' . $this->image)) {
+        if (!empty($this->image) && file_exists(Yii::getAlias('@web') . 'uploads/' . $this->image)) {
             unlink(Yii::getAlias('@web') . 'uploads/' . $this->image);
         }
     }
@@ -209,5 +209,15 @@ class Article extends \yii\db\ActiveRecord
     public function getDate()
     {
         return Yii::$app->formatter->asDate($this->date);
+    }
+
+    /**
+     * Изменение количестао просмотров статьи
+     * @param $id
+     */
+    public function viewedCounter($id)
+    {
+        $this->viewed += 1;
+        $this->save();
     }
 }

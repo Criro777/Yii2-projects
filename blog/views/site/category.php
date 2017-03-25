@@ -52,13 +52,13 @@
                             <div class="popular-post">
 
 
-                                <a href="#" class="popular-img"><img src="<?= $article->getImage();?>" alt="">
+                                <a href="<?=\yii\helpers\Url::toRoute(['site/view','id'=>$article->id]);?>" class="popular-img"><img src="<?= $article->getImage();?>" alt="">
 
                                     <div class="p-overlay"></div>
                                 </a>
 
                                 <div class="p-content">
-                                    <a href="#" class="text-uppercase"><?= $article->title;?></a>
+                                    <a href="<?=\yii\helpers\Url::toRoute(['site/view','id'=>$article->id]);?>" class="text-uppercase"><?= $article->title;?></a>
                                     <span class="p-date"><?= $article->date;?></span>
 
                                 </div>
@@ -74,12 +74,12 @@
 
                                 <div class="media">
                                     <div class="media-left">
-                                        <a href="#" class="popular-img"><img src="<?= $article->getImage();?>" alt="">
+                                        <a href="<?=\yii\helpers\Url::toRoute(['site/view','id'=>$article->id]);?>" class="popular-img"><img src="<?= $article->getImage();?>" alt="">
                                             <div class="p-overlay"></div>
                                         </a>
                                     </div>
                                     <div class="p-content">
-                                        <a href="#" class="text-uppercase"><?= $article->title;?></a>
+                                        <a href="<?=\yii\helpers\Url::toRoute(['site/view','id'=>$article->id]);?>" class="text-uppercase"><?= $article->title;?></a>
                                         <span class="p-date"><?= $article->getDate();?></span>
                                     </div>
                                 </div>

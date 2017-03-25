@@ -78,6 +78,58 @@ class SiteController extends Controller
     }
 
     /**
+     * рендеринг страницы отдельной статьи
+     * @param $id
+     * @return string
+     */
+    public function actionView($id)
+    {
+        //получаем статью по id
+        $article = Article::findOne($id);
+        
+        //изменяем количество просмотров статьи
+        $article->viewedCounter($id);
+        //получаем список популярных статей
+        $popular = Article::getPopular();
+        //получаем список последних статей
+        $recent = Article::getRecent();
+        //получаем список категорий
+        $categories = Category::getAll();
+        //получаем список комментариев
+   
+
+
+        return $this->render('single',[
+            'article'=>$article,
+            'popular'=>$popular,
+            'recent'=>$recent,
+            'categories'=>$categories,
+        ]);
+    }
+
+    /**
+     * Рендеринг блока категорий
+     * @param $id
+     * @return string
+     */
+
+    public function actionCategory($id)
+    {
+        $data = Category::getArticlesByCategory($id);
+        $popular = Article::getPopular();
+        $recent = Article::getRecent();
+        $categories = Category::getAll();
+
+        return $this->render('category',[
+            'articles'=>$data['articles'],
+            'pagination'=>$data['pagination'],
+            'popular'=>$popular,
+            'recent'=>$recent,
+            'categories'=>$categories
+        ]);
+    }
+
+    /**
      * Login action.
      *
      * @return string
@@ -109,31 +161,5 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
-    /**
-     * Displays contact page.
-     *
-     * @return string
-     */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
 
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
 }
