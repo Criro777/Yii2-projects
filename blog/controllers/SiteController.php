@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Article;
 use app\models\Category;
 use app\models\CommentForm;
+use app\models\Tag;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -159,6 +160,51 @@ class SiteController extends Controller
                 return $this->redirect(['site/view','id'=>$id]);
             }
         } else return $this->redirect(['site/index']);
+    }
+
+    /**
+     * Рендеринг страницы категорий
+     * @param $id
+     * @return string
+     */
+
+    public function actionCategory($id)
+    {
+        $data = Category::getArticlesByCategory($id);
+        $popular = Article::getPopular();
+        $recent = Article::getRecent();
+        $categories = Category::getAll();
+
+        return $this->render('category',[
+            'articles'=>$data['articles'],
+            'pagination'=>$data['pagination'],
+            'popular'=>$popular,
+            'recent'=>$recent,
+            'categories'=>$categories
+        ]);
+    }
+
+    /**
+     * Рендеринг страницы тега
+     * @param $id
+     * @return string
+     */
+    public function actionTag($id)
+    {
+
+        $data = Tag::getArticlesByTag($id);
+        $popular = Article::getPopular();
+        $recent = Article::getRecent();
+        $categories = Category::getAll();
+
+        return $this->render('tag',[
+            'articles'=>$data['articles'],
+            'pagination'=>$data['pagination'],
+            'tag' => $data['tag'],
+            'popular'=>$popular,
+            'recent'=>$recent,
+            'categories'=>$categories
+        ]);
     }
 
 

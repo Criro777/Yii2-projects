@@ -30,6 +30,8 @@ class Article extends \yii\db\ActiveRecord
         return 'article';
     }
 
+    protected $fillable =['user_id'];
+
     /**
      * @inheritdoc
      */
@@ -219,5 +221,10 @@ class Article extends \yii\db\ActiveRecord
     {
         $this->viewed += 1;
         $this->save();
+    }
+
+    public function getAuthor()
+    {
+        return $this->hasOne(User::className(), ['id'=>'user_id']);
     }
 }
