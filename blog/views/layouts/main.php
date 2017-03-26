@@ -7,6 +7,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
+
 PublicAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -34,7 +35,8 @@ PublicAsset::register($this);
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a style="margin-top: -5px; margin-left: 15px;" class="navbar-brand" href="/"><img src="/public/images/logo.png" alt=""></a>
+                    <a style="margin-top: -5px; margin-left: 15px;" class="navbar-brand" href="/"><img
+                            src="/public/images/logo.png" alt=""></a>
                 </div>
 
 
@@ -47,17 +49,17 @@ PublicAsset::register($this);
                     </ul>
                     <div class="i_con">
                         <ul class="nav navbar-nav text-uppercase">
-                            <?php if(Yii::$app->user->isGuest):?>
-                                <li><a href="<?= Url::toRoute(['auth/login'])?>">Вход</a></li>
-                                <li><a href="<?= Url::toRoute(['auth/signup'])?>">Регистрация</a></li>
+                            <?php if (Yii::$app->user->isGuest): ?>
+                                <li><a href="<?= Url::toRoute(['auth/login']) ?>">Вход</a></li>
+                                <li><a href="<?= Url::toRoute(['auth/signup']) ?>">Регистрация</a></li>
                             <?php else: ?>
                                 <?= Html::beginForm(['/auth/logout'], 'post')
                                 . Html::submitButton(
                                     'Выход (' . Yii::$app->user->identity->name . ')',
-                                    ['class' => 'btn btn-link logout', 'style'=>"padding-top:10px;"]
+                                    ['class' => 'btn btn-link logout', 'style' => "padding-top:10px;"]
                                 )
                                 . Html::endForm() ?>
-                            <?php endif;?>
+                            <?php endif; ?>
                         </ul>
                     </div>
 
@@ -73,119 +75,20 @@ PublicAsset::register($this);
 
 
     <footer class="footer-widget-section">
-        <div class="container">
+        <div class="container>
             <div class="row">
-                <div class="col-md-4">
-                    <aside class="footer-widget">
-                        <div style="margin-left: 20px;" class="about-img"><img src="/public/images/logo2.png" alt=""></div>
-                        <div class="about-content">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                            eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed voluptua. At vero eos et
-                            accusam et justo duo dlores et ea rebum magna text ar koto din.
+                    <div style="padding: 20px 0 10px 0;" class="text-center">
+                        <div  class="about-img"><img src="/public/images/logo2.png" alt="">
                         </div>
                         <div class="address">
-                            <h4 class="text-uppercase">contact Info</h4>
 
-                            <p> 14529/12 NK Streets, DC, KZ</p>
-
-                            <p> Phone: +123 456 78900</p>
-
-                            <p>mytreasure.com</p>
+                            <p> E-мэйл: awesome@service.com</p>
+                            <p> Телефон: +123 456 78900</p>
                         </div>
-                    </aside>
-                </div>
-
-                <div class="col-md-4">
-                    <aside class="footer-widget">
-                        <h3 class="widget-title text-uppercase">Testimonials</h3>
-
-                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                            <!--Indicator-->
-                            <ol class="carousel-indicators">
-                                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                                <li data-target="#myCarousel" data-slide-to="1"></li>
-                                <li data-target="#myCarousel" data-slide-to="2"></li>
-                            </ol>
-                            <div class="carousel-inner" role="listbox">
-                                <div class="item active">
-                                    <div class="single-review">
-                                        <div class="review-text">
-                                            <p>Lorem ipsum dolor sit amet, conssadipscing elitr, sed diam nonumy eirmod
-                                                tempvidunt ut labore et dolore magna aliquyam erat,sed diam voluptua. At
-                                                vero eos et accusam justo duo dolores et ea rebum.gubergren no sea takimata
-                                                magna aliquyam eratma</p>
-                                        </div>
-                                        <div class="author-id">
-                                            <img src="/public/images/author.png" alt="">
-
-                                            <div class="author-text">
-                                                <h4>Sophia</h4>
-
-                                                <h4>CEO, ReadyTheme</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="single-review">
-                                        <div class="review-text">
-                                            <p>Lorem ipsum dolor sit amet, conssadipscing elitr, sed diam nonumy eirmod
-                                                tempvidunt ut labore et dolore magna aliquyam erat,sed diam voluptua. At
-                                                vero eos et accusam justo duo dolores et ea rebum.gubergren no sea takimata
-                                                magna aliquyam eratma</p>
-                                        </div>
-                                        <div class="author-id">
-                                            <img src="/public/images/author.png" alt="">
-
-                                            <div class="author-text">
-                                                <h4>Sophia</h4>
-
-                                                <h4>CEO, ReadyTheme</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="single-review">
-                                        <div class="review-text">
-                                            <p>Lorem ipsum dolor sit amet, conssadipscing elitr, sed diam nonumy eirmod
-                                                tempvidunt ut labore et dolore magna aliquyam erat,sed diam voluptua. At
-                                                vero eos et accusam justo duo dolores et ea rebum.gubergren no sea takimata
-                                                magna aliquyam eratma</p>
-                                        </div>
-                                        <div class="author-id">
-                                            <img src="/public/images/author.png" alt="">
-
-                                            <div class="author-text">
-                                                <h4>Sophia</h4>
-
-                                                <h4>CEO, ReadyTheme</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </aside>
-                </div>
-                <div class="col-md-4">
-                    <aside class="footer-widget">
-                        <h3 class="widget-title text-uppercase">Custom Category Post</h3>
-
-
-                        <div class="custom-post">
-                            <div>
-                                <a href="#"><img src="/public/images/footer-img.png" alt=""></a>
-                            </div>
-                            <div>
-                                <a href="#" class="text-uppercase">Home is peaceful Place</a>
-                                <span class="p-date">February 15, 2016</span>
-                            </div>
-                        </div>
-                    </aside>
-                </div>
+                    </div>
             </div>
         </div>
+
         <div class="footer-copy">
             <div class="container">
                 <div class="row">
@@ -199,7 +102,7 @@ PublicAsset::register($this);
     </footer>
 
     <?php $this->endBody() ?>
-    
+
     </body>
     </html>
 <?php $this->endPage() ?>

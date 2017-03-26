@@ -4,10 +4,10 @@
         <div class="row">
      
             <div class="col-md-8">
-                <article class="post post-list" style="margin-bottom: 10px; background: ghostwhite;">
-                    <h1 style="padding:0 25px;0 0"><?=$tags->title?></h1>
+                <article class="post post-list" style="margin-bottom: 10px; background: #fff;">
+                    <h1 style="padding:0 25px;0 0"><?=$tag->title?></h1>
                 </article>
-                <?php foreach($tags->articles as $article):?>
+                <?php foreach($articles as $article):?>
                     <article class="post post-list">
                         <div class="row">
                             <div class="col-md-6">
@@ -31,7 +31,7 @@
                                         </p>
                                     </div>
                                     <div class="social-share">
-                                        <span class="social-share-title pull-left text-capitalize">By Rubel On <?= $article->getDate();?></span>
+                                        <span class="social-share-title pull-left text-capitalize"><b><?= $article->author->name ?></b> ,  <?= $article->getDate();?></span>
 
                                     </div>
                                 </div>
@@ -39,6 +39,11 @@
                         </div>
                     </article>
                 <?php endforeach;?>
+                <?php
+                echo \yii\widgets\LinkPager::widget([
+                    'pagination' => $pagination,
+                ]);
+                ?>
 
 
             </div>
@@ -51,13 +56,13 @@
                             <div class="popular-post">
 
 
-                                <a href="#" class="popular-img"><img src="<?= $article->getImage();?>" alt="">
+                                <a href="<?= \yii\helpers\Url::toRoute(['site/view','id'=>$article->id]);?>" class="popular-img"><img src="<?= $article->getImage();?>" alt="">
 
                                     <div class="p-overlay"></div>
                                 </a>
 
                                 <div class="p-content">
-                                    <a href="#" class="text-uppercase"><?= $article->title;?></a>
+                                    <a href="<?= \yii\helpers\Url::toRoute(['site/view','id'=>$article->id]);?>" class="text-uppercase"><?= $article->title;?></a>
                                     <span class="p-date"><?= $article->date;?></span>
 
                                 </div>
@@ -73,12 +78,12 @@
 
                                 <div class="media">
                                     <div class="media-left">
-                                        <a href="#" class="popular-img"><img src="<?= $article->getImage();?>" alt="">
+                                        <a href="<?= \yii\helpers\Url::toRoute(['site/view','id'=>$article->id]);?>" class="popular-img"><img src="<?= $article->getImage();?>" alt="">
                                             <div class="p-overlay"></div>
                                         </a>
                                     </div>
                                     <div class="p-content">
-                                        <a href="#" class="text-uppercase"><?= $article->title;?></a>
+                                        <a href="<?= \yii\helpers\Url::toRoute(['site/view','id'=>$article->id]);?>" class="text-uppercase"><?= $article->title;?></a>
                                         <span class="p-date"><?= $article->getDate();?></span>
                                     </div>
                                 </div>

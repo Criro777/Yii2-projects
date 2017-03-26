@@ -30,7 +30,7 @@
                                 </div>
                             </div>
                             <div class="social-share">
-                                <span class="social-share-title pull-left text-capitalize"><a href="#">Ruben</a> On <?= $article->getDate();?></span>
+                                <span class="social-share-title pull-left text-capitalize"><b><?= $article->author->name ?></b> ,  <?= $article->getDate();?></span>
                                 <ul class="text-center pull-right">
                                     <li><a class="s-facebook" href="#"><i class="fa fa-eye"></i></a></li><?= (int) $article->viewed?>
                                 </ul>

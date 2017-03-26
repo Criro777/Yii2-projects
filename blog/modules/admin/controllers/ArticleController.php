@@ -76,6 +76,8 @@ class ArticleController extends Controller
             $tags = Yii::$app->request->post('tags');
             $model->saveTags($tags);
 
+            $model->user_id = Yii::$app->user->id;
+
             $category = Category::findOne(Yii::$app->request->post('category'));
 
             $model->saveCategory($category);
